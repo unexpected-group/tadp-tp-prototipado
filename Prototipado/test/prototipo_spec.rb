@@ -7,9 +7,9 @@ describe 'Prototipado - Ruby' do
   it 'Agregar una variable' do
     conan = Object.new
     conan.agregar_variable(:@vida, 100)
-    expect(conan.cantidad_variables).to eq 1 # testea que se agregue la variable
+    expect(conan.cantidad_variables).to eq 1
     conan.vida = 200
-    expect(conan.vida).to eq 200 # testea el que se generen la propiedades
+    expect(conan.vida).to eq 200
   end
 
   it 'Agregar un metodo' do
@@ -19,7 +19,7 @@ describe 'Prototipado - Ruby' do
     expect(conan.singleton_methods).to include(:metodo)
   end
 
-  it 'Agregar un metodo y clonar para que otro no lo entienda' do
+  it 'Se agrega un metodo y solo se agrega en el objeto designado' do
     conan = Object.new
     zorro = Object.new
     metodo = proc {1}

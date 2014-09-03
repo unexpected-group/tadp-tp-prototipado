@@ -4,7 +4,7 @@ module Prototipo
     self.instance_variable_set(selector, valor)
     nombre = selector.to_s.delete '@'
     self.class.instance_eval do
-        attr_accessor nombre
+      attr_accessor nombre
     end
   end
 
@@ -12,7 +12,6 @@ module Prototipo
     self.define_singleton_method(selector) do
       metodo
     end
-
   end
 
   def agregar_prototipo(prototipo)
@@ -21,7 +20,7 @@ module Prototipo
   end
 
   def actualizar_metodos_del_prototipo
-    # TAREA PARA SHEN LONG
+    # tarea para SHEN LONG
   end
 
   def cantidad_variables
@@ -30,6 +29,12 @@ module Prototipo
 
 end
 
+module Observable
+  # definir metodos de observacion para cuando hay cambios en el prototipo
+end
+
 class Object
   include Prototipo
+  include Observable
+
 end
