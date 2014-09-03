@@ -8,13 +8,28 @@ module Prototipo
     end
   end
 
+  def agregar_metodo(selector, metodo)
+    self.define_singleton_method(selector) do
+      metodo
+    end
+
+  end
+
+  def agregar_prototipo(prototipo)
+    @prototipo = prototipo
+    actualizar_metodos_del_prototipo
+  end
+
+  def actualizar_metodos_del_prototipo
+    # TAREA PARA SHEN LONG
+  end
+
   def cantidad_variables
     self.instance_variables.count
   end
 
 end
 
-class Guerrero
+class Object
   include Prototipo
-
 end
