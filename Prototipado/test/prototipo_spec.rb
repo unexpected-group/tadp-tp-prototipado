@@ -48,4 +48,13 @@ describe 'Prototipado - Ruby' do
     expect(zorro.singleton_methods.include?(:metodo)).to be true
   end
 
+  it 'Se agrega un metodo en el hijo y el apdre no lo tiene' do
+    conan = Object.new
+    zorro = Object.new
+    metodo = proc {1}
+    zorro.agregar_prototipo(conan)
+    zorro.agregar_metodo(:metodo, metodo)
+    expect(conan.singleton_methods.include?(:metodo)).to be false
+  end
+
 end
