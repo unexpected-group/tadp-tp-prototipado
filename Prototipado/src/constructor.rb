@@ -1,11 +1,15 @@
 module Constructor
 
   def initialize(prototipo)
-    clase = Class.new
-    clase.agregar_prototipo(prototipo)
-    clase
+    objeto = Class.new
+    objeto.agregar_metodo(:initialize, proc {
+      |mapa|
+      mapa.each_key { |clave|
+      clave = mapa[clave]
+      }
+    })
+  objeto
   end
-
 end
 
 def Class
@@ -14,11 +18,6 @@ end
 
 class Jugador
   attr_accessor :goles, :edad
-
-  def initialize(goles, edad)
-    @goles = goles
-    @edad = edad
-  end
 
   def hacer_gol
     @goles += 1

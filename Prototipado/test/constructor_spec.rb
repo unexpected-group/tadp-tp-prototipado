@@ -7,9 +7,10 @@ require 'rspec'
 describe 'Constructores en Ruby' do
 
   it 'should do something' do
-    jugador_prototipo = Jugador.new(200, 25)
-    Jugador = Class.new(jugador_prototipo)
-    jugador2 = Jugador.new(15, 20)
-    expect(jugador2.edad).to eq 25
+    prototipo = Object.new
+    prototipo.agregar_variable(:@vida, 20)
+    Jugador = Class.new(prototipo)
+    jugador = Jugador.new({vida: 15})
+    expect(jugador.vida).to eq 15
   end
 end
