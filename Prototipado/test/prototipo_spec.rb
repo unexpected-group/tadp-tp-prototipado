@@ -2,9 +2,9 @@ load '../src/prototipo.rb'
 
 require 'rspec'
 
-describe 'Prototipado - Ruby' do
+describe 'Prototipado en Ruby' do
 
-  it 'Agregar una variable' do
+  it 'Se agrega una variable' do
     conan = Object.new
     conan.agregar_variable(:@vida, 100)
     expect(conan.cantidad_variables).to eq 1
@@ -12,49 +12,58 @@ describe 'Prototipado - Ruby' do
     expect(conan.vida).to eq 200
   end
 
-  it 'Agregar un metodo' do
+  it 'Se agrega un metodo' do
     conan = Object.new
-    metodo = proc {1}
+    metodo = proc { 1 }
     conan.agregar_metodo(:metodo, metodo)
     expect(conan.singleton_methods).to include(:metodo)
   end
 
-  it 'Se agrega un metodo y solo se agrega en el objeto designado' do
+  it 'Se agrega un metodo a un objeto y no se agrega en la clase' do
     conan = Object.new
     zorro = Object.new
-    metodo = proc {1}
+    metodo = proc { 1 }
     conan.agregar_metodo(:metodo, metodo)
     expect(zorro.singleton_methods.include?(:metodo)).to be false
   end
 
-  it 'Se agrega un prototipo y se heredan los mensajes' do
+  it 'Un objeto contiene todos los metodos de su prototipo' do
     conan = Object.new
     zorro = Object.new
-    metodo = proc {1}
+    metodo = proc { 1 }
     conan.agregar_metodo(:metodo, metodo)
     zorro.agregar_prototipo(conan)
     expect(zorro.singleton_methods.include?(:metodo)).to be true
+    expect(zorro.methods(false).count).to eq conan.methods(false).count
   end
 
-  it 'El prototipo agrega un metodo y todos sus hijos los agregan' do
+  it 'Se agrega un metodo al prototipo y todos sus objetos dependientes lo agregan' do
     conan = Object.new
     zorro = Object.new
     atila = Object.new
     zorro.agregar_prototipo(conan)
     atila.agregar_prototipo(conan)
-    metodo = proc {1}
+    metodo = proc { 1 }
     conan.agregar_metodo(:metodo, metodo)
     expect(atila.singleton_methods.include?(:metodo)).to be true
     expect(zorro.singleton_methods.include?(:metodo)).to be true
   end
 
-  it 'Se agrega un metodo en el hijo y el apdre no lo tiene' do
+  it 'Se agrega un metodo a un objeto y su prototipo no se ve afectado' do
     conan = Object.new
     zorro = Object.new
-    metodo = proc {1}
-    zorro.agregar_prototipo(conan)
+    metodo = proc { 1 }
     zorro.agregar_metodo(:metodo, metodo)
+    zorro.agregar_prototipo(conan)
     expect(conan.singleton_methods.include?(:metodo)).to be false
+  end
+
+  it 'Se agrega una variable a un objeto y su prototipo no se ve afectado' do
+    conan = Object.new
+    zorro = Object.new
+    conan.agregar_variable(:@edad, 20)
+    zorro.agregar_prototipo(conan)
+    expect(zorro.instance_variables.include?(:@edad)).to be false
   end
 
 end
