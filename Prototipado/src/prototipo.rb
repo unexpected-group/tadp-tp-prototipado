@@ -1,3 +1,5 @@
+require '../src/observable'
+
 module Prototipo
 
   def agregar_variable(selector, valor)
@@ -15,7 +17,7 @@ module Prototipo
   end
 
   def agregar_prototipo(prototipo)
-    @prototipo = prototipo
+    agregar_observable
     actualizar_metodos_del_prototipo
   end
 
@@ -27,10 +29,6 @@ module Prototipo
     self.instance_variables.count
   end
 
-end
-
-module Observable
-  # definir metodos de observacion para cuando hay cambios en el prototipo
 end
 
 class Object
