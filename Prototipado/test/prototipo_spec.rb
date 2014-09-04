@@ -66,4 +66,13 @@ describe 'Prototipado en Ruby' do
     expect(zorro.instance_variables.include?(:@edad)).to be false
   end
 
+  it 'Se redefine un metodo en el prototipo y los objetos dependientes no cambian su comportamiento' do
+    conan = Object.new
+    atila = Object.new
+    conan.agregar_metodo(:metodo, proc {1})
+    atila.agregar_prototipo(conan)
+    conan.agregar_metodo(:metodo, proc {2})
+    expect(atila.metodo.call.call).to eq 1 # por que call call?
+  end
+
 end

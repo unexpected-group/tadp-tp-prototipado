@@ -8,7 +8,7 @@ module Observable
   def notificar_metodo_agregado(selector, metodo)
     @observadores.each {
         |observador|
-      observador.agregar_metodo(selector, metodo)
+      observador.agregar_metodo(selector, metodo) unless observador.methods(false).include?(selector)
     } unless @observadores.nil?
   end
 
