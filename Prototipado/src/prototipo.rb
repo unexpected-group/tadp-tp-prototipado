@@ -1,6 +1,7 @@
 require '../src/observable'
 
 module Prototipo
+  include Observable
 
   def agregar_variable(selector, valor)
     self.instance_variable_set(selector, valor)
@@ -14,15 +15,20 @@ module Prototipo
     self.define_singleton_method(selector) do
       metodo
     end
+    self.notificar_metodo_agregado(selector, metodo)
   end
 
-  def agregar_prototipo(prototipo)
-    agregar_observable
-    actualizar_metodos_del_prototipo
+  def agregar_prototipo(prototipo) # para agregar solo comportamiento
+    prototipo.agregar_observador(self)
+    self.actualizar_metodos(prototipo)
   end
 
-  def actualizar_metodos_del_prototipo
-    @prototipo.methods(false).each { |metodo| self.define_singleton_method()  }
+
+  def actualizar_metodos(prototipo)
+    prototipo.methods(false).each {
+        |selector|
+      self.agregar_metodo(selector, prototipo.method(selector))
+    }
   end
 
   def cantidad_variables
@@ -33,6 +39,4 @@ end
 
 class Object
   include Prototipo
-  include Observable
-
 end
