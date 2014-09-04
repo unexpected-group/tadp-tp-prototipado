@@ -45,6 +45,14 @@ module Prototipo
     self.methods(false).count
   end
 
+  def atributos
+    mapa = {}
+    self.instance_variables.each do |selector|
+      mapa[selector] = self.instance_variable_get selector
+    end
+    mapa
+  end
+
 end
 
 class Object

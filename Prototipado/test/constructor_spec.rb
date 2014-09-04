@@ -6,11 +6,18 @@ require 'rspec'
 
 describe 'Constructores en Ruby' do
 
-  it 'should do something' do
-    prototipo = Object.new
-    prototipo.agregar_variable(:@vida, 20)
-    Jugador = Class.new(prototipo)
-    jugador = Jugador.new({vida: 15})
-    expect(jugador.vida).to eq 15
+  it 'crear un constructor' do
+    prototipo = Jugador.new
+    Arquero = Constructor.new(prototipo)
+    arquero = Arquero.new
+    expect(arquero).to be_a(Jugador)
   end
+
+  it 'crear un constructor' do
+    prototipo = Jugador.new
+    Arquero = Constructor.new(prototipo)
+    arquero = Arquero.new({goles: 5, edad:18})
+    expect(arquero.goles).to eq(5)
+  end
+
 end

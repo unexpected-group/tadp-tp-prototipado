@@ -1,20 +1,18 @@
-module Constructor
+class Constructor
 
   def initialize(prototipo)
-    objeto = Class.new
-    objeto.agregar_metodo(:initialize, proc {
-      |mapa|
-      mapa.each_key { |clave|
-      clave = mapa[clave]
-      }
-    })
-  objeto
+
+    @prototipo = prototipo
+
+  end
+
+  def new(mapa = {})
+    object = @prototipo.class.new
   end
 end
 
-def Class
-  include Constructor
-end
+
+#object.instance_methods.each {|m| self.define_method }
 
 class Jugador
   attr_accessor :goles, :edad
