@@ -22,7 +22,7 @@ module Prototipo
   end
 
   def actualizar_metodos_del_prototipo
-    # tarea para SHEN LONG
+    @prototipo.methods(false).each { |metodo| self.define_singleton_method()  }
   end
 
   def cantidad_variables
