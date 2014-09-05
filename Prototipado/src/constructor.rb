@@ -7,7 +7,8 @@ class Constructor
   def new(mapa = {})
     object = @prototipo.class.new
     mapa.each { |clave, valor|
-      object.agregar_variable(:@clave, valor)}
+      selector = '@'.concat(clave.to_s)
+      object.agregar_variable(selector.to_sym, valor)}
     object
   end
 end

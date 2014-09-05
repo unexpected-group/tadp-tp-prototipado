@@ -17,7 +17,7 @@ describe 'Constructores en Ruby' do
     prototipo = Jugador.new
     Arquero = Constructor.new(prototipo)
     arquero = Arquero.new({:goles => 5, :edad => 18})
-    expect(arquero.instance_variables).to include(:@goles)
+    expect(arquero.goles).to eq 5
   end
 
 end
