@@ -6,7 +6,7 @@ require 'rspec'
 
 describe 'Constructores en Ruby' do
 
-  it 'crear un constructor' do
+  it 'crear una clase desde un prototipo' do
     prototipo = Jugador.new
     Arquero = Constructor.new(prototipo)
     arquero = Arquero.new
@@ -16,8 +16,8 @@ describe 'Constructores en Ruby' do
   it 'crear un constructor' do
     prototipo = Jugador.new
     Arquero = Constructor.new(prototipo)
-    arquero = Arquero.new({goles: 5, edad:18})
-    expect(arquero.goles).to eq(5)
+    arquero = Arquero.new({:goles => 5, :edad => 18})
+    expect(arquero.instance_variables).to include(:@goles)
   end
 
 end
