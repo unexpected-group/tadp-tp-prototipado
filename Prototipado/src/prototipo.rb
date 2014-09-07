@@ -8,7 +8,7 @@ module Prototipo
   # agrega una variable de instancia y crea sus accesors
   def agregar_variable(selector, valor)
     self.instance_variable_set(selector, valor)
-    nombre = selector.to_s.delete '@'
+    nombre = selector.to_s.delete '@' # porque esto
     self.class.instance_eval do
       attr_accessor nombre
     end
@@ -46,17 +46,13 @@ module Prototipo
     self.methods(false).count
   end
 
-  def atributos
+  # devuelve un mapa con los nombres de las variables y sus valores
+  def variables
     mapa = {}
     self.instance_variables.each do |selector|
       mapa[selector] = self.instance_variable_get selector
     end
     mapa
   end
-
-end
-
-class Object
-  include Prototipo
 
 end

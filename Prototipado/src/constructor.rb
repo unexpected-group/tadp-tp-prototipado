@@ -4,6 +4,7 @@ class Constructor
     @prototipo = prototipo
   end
 
+  # devuelve un objeto con las variables pasadas por parametro en el mapa
   def new(mapa = {})
     object = self.prototipo.class.new
     mapa.each {
@@ -14,6 +15,7 @@ class Constructor
     object
   end
 
+  # devuelve un objeto copia de un prototipo (metodo de clase)
   def self.copy(prototipo)
     clase = self.new(prototipo)
     objeto = clase.new(prototipo.instance_variables)
@@ -29,4 +31,10 @@ class Jugador
   def hacer_gol
     self.goles += 1
   end
+
+end
+
+class Object
+  include Prototipo
+
 end
