@@ -2,6 +2,7 @@ require '../src/observable'
 
 module Prototipo
   include Observable
+
   attr_accessor :prototipo
 
   # agrega una variable de instancia y crea sus accesors

@@ -5,18 +5,21 @@ class Constructor
   end
 
   def new(mapa = {})
-    object = @prototipo.class.new
-    mapa.each { |clave, valor|
+    object = self.prototipo.class.new
+    mapa.each {
+        |clave, valor|
       selector = '@'.concat(clave.to_s)
-      object.agregar_variable(selector.to_sym, valor)}
+      object.agregar_variable(selector.to_sym, valor)
+    }
     object
   end
 end
 
 class Jugador
+
   attr_accessor :goles, :edad
 
   def hacer_gol
-    @goles += 1
+    self.goles += 1
   end
 end

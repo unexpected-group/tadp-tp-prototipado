@@ -72,10 +72,7 @@ describe 'Prototipado en Ruby' do
     conan.agregar_metodo(:metodo, "definicion original")
     atila.agregar_prototipo(conan)
     conan.agregar_metodo(:metodo, "redefinicion")
-    expect(atila.metodo.call).to eq "definicion original" # por que call call?
-                                                          # manu: porque en agregar_metodo se le pasaba un bloque
-                                                          # entonces hacias call por el metodo que te daba el bloque
-                                                          # y despues otro call mas por el bloque.
+    expect(atila.metodo.call).to eq "definicion original"
   end
 
 end

@@ -1,7 +1,6 @@
 load '../src/prototipo.rb'
 load '../src/constructor.rb'
 
-
 require 'rspec'
 
 describe 'Constructores en Ruby' do
