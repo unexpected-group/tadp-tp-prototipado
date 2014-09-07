@@ -13,6 +13,13 @@ class Constructor
     }
     object
   end
+
+  def self.copy(prototipo)
+    clase = self.new(prototipo)
+    objeto = clase.new(prototipo.instance_variables)
+    objeto
+  end
+
 end
 
 class Jugador
