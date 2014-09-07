@@ -13,11 +13,19 @@ describe 'Constructores en Ruby' do
     expect(arquero).to be_a(Jugador)
   end
 
-  it 'crear un constructor' do
+  it 'crear un constructor por defecto' do
     prototipo = Jugador.new
     Arquero = Constructor.new(prototipo)
     arquero = Arquero.new({:goles => 5, :edad => 18})
     expect(arquero.goles).to eq 5
+  end
+
+  it 'crear un constructor que copie el estado del prototipo' do
+    prototipo = Jugador.new
+    prototipo.goles = 2
+    Arquero = Constructor.copy(prototipo)
+    arquero = Arquero.new
+    expect(arquero.goles).to eq 2
   end
 
 end
