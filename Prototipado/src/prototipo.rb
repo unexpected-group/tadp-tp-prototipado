@@ -8,7 +8,7 @@ module Prototipo
   # agrega una variable de instancia y crea sus accesors
   def agregar_variable(selector, valor)
     self.instance_variable_set(selector, valor)
-    nombre = selector.to_s.delete '@' # porque esto?
+    nombre = selector.to_s.delete '@'
     self.class.instance_eval do
       attr_accessor nombre
     end
