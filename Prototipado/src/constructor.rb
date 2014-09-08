@@ -20,6 +20,8 @@ class Constructor
     objeto
   end
 
+  alias :nuevo :new
+
   # devuelve un objeto copia de un prototipo (metodo de clase)
   def self.copy(prototipo)
     clase = self.new(prototipo)
@@ -29,7 +31,7 @@ class Constructor
       mapa[clave] = prototipo.instance_variable_get(clave)
       mapa
     }
-    bloque = Proc.new {instance_method(:new).call(mapa)}
+    bloque = Proc.new {clase.method(:nuevo).call(mapa)}
     clase.agregar_metodo(:new, bloque)
     clase
   end
