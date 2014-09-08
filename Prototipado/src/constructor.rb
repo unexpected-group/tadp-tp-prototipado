@@ -6,7 +6,7 @@ class Constructor
 
   # devuelve un objeto con las variables pasadas por parametro en el mapa
   def new(mapa = {})
-    clase = self.prototipo.class.new
+    objeto = self.prototipo.class.new
     mapa.each {
         |clave, valor|
       selector = ''
@@ -15,10 +15,9 @@ class Constructor
       else
         selector = '@'.concat(clave.to_s)
       end
-      puts valor
-      clase.agregar_variable(selector.to_sym, valor)
+      objeto.agregar_variable(selector.to_sym, valor)
     }
-    clase
+    objeto
   end
 
   # devuelve un objeto copia de un prototipo (metodo de clase)
@@ -28,11 +27,10 @@ class Constructor
     prototipo.instance_variables.each {
         |clave|
       mapa[clave] = prototipo.instance_variable_get(clave)
-      puts mapa
       mapa
     }
-    objeto = clase.new(mapa)
-    objeto
+    clase.agregar_metodo(:new, proc {self.method(:new).call(mapa)})
+    clase
   end
 
 end
