@@ -20,11 +20,11 @@ describe 'Constructores en Ruby' do
   end
 
   it 'crear un constructor que copie el estado del prototipo' do
-    prototipo = Jugador.new
-    prototipo.goles = 2
-    ConstructorJugador = Constructor.copy(prototipo)
-    arquero = ConstructorJugador.new
-    expect(arquero.goles).to eq 2
+    prototipoJugador = Jugador.new
+    prototipoJugador.goles = 2
+    ConstructorJugador = Constructor.copy(prototipoJugador)
+    jugador = ConstructorJugador.new
+    expect(jugador.goles).to eq 2
   end
 
 end
