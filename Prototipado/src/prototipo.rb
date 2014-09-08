@@ -8,7 +8,7 @@ module Prototipo
   # agrega una variable de instancia y crea sus accesors
   def agregar_variable(selector, valor)
     self.instance_variable_set(selector, valor)
-    nombre = selector.to_s.delete '@' # porque esto
+    nombre = selector.to_s.delete '@' # porque esto?
     self.class.instance_eval do
       attr_accessor nombre
     end
@@ -16,9 +16,7 @@ module Prototipo
 
   # agrega un nuevo singleton method
   def agregar_metodo(selector, metodo)
-    self.define_singleton_method(selector) do
-      metodo
-    end
+    self.define_singleton_method(selector, metodo)
     self.notificar_metodo_agregado(selector, metodo)
   end
 
@@ -32,7 +30,7 @@ module Prototipo
   def actualizar_metodos(prototipo)
     prototipo.methods(false).each {
         |selector|
-      self.agregar_metodo(selector, prototipo.method(selector))
+      self.agregar_metodo(selector, prototipo.method(selector).to_proc)
     }
   end
 
@@ -55,4 +53,8 @@ module Prototipo
     mapa
   end
 
+end
+
+class Object
+  include Prototipo
 end

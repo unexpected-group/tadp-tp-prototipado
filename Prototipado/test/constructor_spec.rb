@@ -22,7 +22,7 @@ describe 'Constructores en Ruby' do
   it 'crear un constructor que copie el estado del prototipo' do
     prototipo = Jugador.new
     prototipo.goles = 2
-    Arquero = Constructor.copy(prototipo)
+    Arquero = Constructor.copy(prototipo) # esto me devuelve de una el objeto, me tiene que devolver la clase que cree al objeto
     arquero = Arquero.new
     expect(arquero.goles).to eq 2
   end

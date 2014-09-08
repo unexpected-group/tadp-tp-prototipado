@@ -69,10 +69,10 @@ describe 'Prototipado en Ruby' do
   it 'Se redefine un metodo en el prototipo y los objetos dependientes no cambian su comportamiento' do
     conan = Object.new
     atila = Object.new
-    conan.agregar_metodo(:metodo, "definicion original")
+    conan.agregar_metodo(:metodo, proc {"definicion original"})
     atila.agregar_prototipo(conan)
-    conan.agregar_metodo(:metodo, "redefinicion")
-    expect(atila.metodo.call).to eq "definicion original"
+    conan.agregar_metodo(:metodo, proc {"redefinicion"})
+    expect(atila.metodo).to eq "definicion original"
   end
 
 end
