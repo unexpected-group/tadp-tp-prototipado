@@ -29,7 +29,8 @@ class Constructor
       mapa[clave] = prototipo.instance_variable_get(clave)
       mapa
     }
-    clase.agregar_metodo(:new, proc {self.method(:new).call(mapa)})
+    bloque = Proc.new {instance_method(:new).call(mapa)}
+    clase.agregar_metodo(:new, bloque)
     clase
   end
 
