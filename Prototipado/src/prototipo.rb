@@ -54,12 +54,26 @@ module Prototipo
   end
 
   def method_missing(selector, *argumentos, &block)
-    puts selector.to_s
-  end
+    if  selector.to_s.start_with?('prop')
+      array = selector.to_s.split('_')
+      nombre = '@'.concat(array[1])
+      self.agregar_variable(nombre.to_sym, argumentos[0])
 
+    elsif selector.to_s.start_with?('met')
+      array = selector.to_s.split('_')
+      nombre = array[1]
+      self.agregar_metodo(nombre.to_sym, argumentos[0])
+
+    else
+      super
+    end
+  end
 end
 
 class Object
   include Prototipo
 end
+
+
+
 
