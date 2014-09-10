@@ -53,8 +53,13 @@ module Prototipo
     mapa
   end
 
+  def method_missing(selector, *argumentos, &block)
+    puts selector.to_s
+  end
+
 end
 
 class Object
   include Prototipo
 end
+
