@@ -62,7 +62,7 @@ module Prototipo
     elsif selector.to_s.start_with?('met')
       array = selector.to_s.split('_')
       nombre = array[1]
-      self.agregar_metodo(nombre.to_sym, argumentos[0])
+      self.agregar_metodo(nombre.to_sym, block)
 
     else
       super
