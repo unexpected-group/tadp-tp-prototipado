@@ -6,8 +6,8 @@ describe 'Prototipado en Ruby' do
 
   it 'Se agrega una variable' do
     conan = Object.new
-    conan.agregar_variable(:@vida, 100)
-    expect(conan.cantidad_variables).to eq 1
+    conan.set_property(:@vida, 100)
+    expect(conan.number_of_properties).to eq 1
     conan.vida = 200
     expect(conan.vida).to eq 200
   end
@@ -15,7 +15,7 @@ describe 'Prototipado en Ruby' do
   it 'Se agrega un metodo' do
     conan = Object.new
     metodo = proc { 1 }
-    conan.agregar_metodo(:metodo, metodo)
+    conan.set_method(:metodo, metodo)
     expect(conan.singleton_methods).to include(:metodo)
   end
 
@@ -23,7 +23,7 @@ describe 'Prototipado en Ruby' do
     conan = Object.new
     zorro = Object.new
     metodo = proc { 1 }
-    conan.agregar_metodo(:metodo, metodo)
+    conan.set_method(:metodo, metodo)
     expect(zorro.singleton_methods.include?(:metodo)).to be false
   end
 
@@ -31,8 +31,8 @@ describe 'Prototipado en Ruby' do
     conan = Object.new
     zorro = Object.new
     metodo = proc { 1 }
-    conan.agregar_metodo(:metodo, metodo)
-    zorro.agregar_prototipo(conan)
+    conan.set_method(:metodo, metodo)
+    zorro.add_prototype(conan)
     expect(zorro.singleton_methods.include?(:metodo)).to be true
     expect(zorro.methods(false).count).to eq conan.methods(false).count
   end
@@ -41,10 +41,10 @@ describe 'Prototipado en Ruby' do
     conan = Object.new
     zorro = Object.new
     atila = Object.new
-    zorro.agregar_prototipo(conan)
-    atila.agregar_prototipo(conan)
+    zorro.add_prototype(conan)
+    atila.add_prototype(conan)
     metodo = proc { 1 }
-    conan.agregar_metodo(:metodo, metodo)
+    conan.set_method(:metodo, metodo)
     expect(atila.singleton_methods.include?(:metodo)).to be true
     expect(zorro.singleton_methods.include?(:metodo)).to be true
   end
@@ -53,25 +53,25 @@ describe 'Prototipado en Ruby' do
     conan = Object.new
     zorro = Object.new
     metodo = proc { 1 }
-    zorro.agregar_metodo(:metodo, metodo)
-    zorro.agregar_prototipo(conan)
+    zorro.set_method(:metodo, metodo)
+    zorro.add_prototype(conan)
     expect(conan.singleton_methods.include?(:metodo)).to be false
   end
 
   it 'Se agrega una variable a un objeto y su prototipo no se ve afectado' do
     conan = Object.new
     zorro = Object.new
-    conan.agregar_variable(:@edad, 20)
-    zorro.agregar_prototipo(conan)
+    conan.set_property(:@edad, 20)
+    zorro.add_prototype(conan)
     expect(zorro.instance_variables.include?(:@edad)).to be false
   end
 
   it 'Se redefine un metodo en el prototipo y los objetos dependientes no cambian su comportamiento' do
     conan = Object.new
     atila = Object.new
-    conan.agregar_metodo(:metodo, proc {"definicion original"})
-    atila.agregar_prototipo(conan)
-    conan.agregar_metodo(:metodo, proc {"redefinicion"})
+    conan.set_method(:metodo, proc {"definicion original"})
+    atila.add_prototype(conan)
+    conan.set_method(:metodo, proc {"redefinicion"})
     expect(atila.metodo).to eq "definicion original"
   end
 

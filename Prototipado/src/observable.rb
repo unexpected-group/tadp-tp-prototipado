@@ -1,14 +1,14 @@
 module Observable
 
-  def agregar_observador(observador)
+  def add_observer(observador)
     @observadores = @observadores || []
     @observadores << observador
   end
 
-  def notificar_metodo_agregado(selector, metodo)
+  def notify_method_added(selector, metodo)
     @observadores.each {
         |observador|
-      observador.agregar_metodo(selector, metodo) unless observador.methods(false).include?(selector)
+      observador.set_method(selector, metodo) unless observador.methods(false).include?(selector)
     } unless @observadores.nil?
   end
 
