@@ -1,7 +1,7 @@
-load '../src/prototipo.rb'
-load '../src/constructor.rb'
-
 require 'rspec'
+
+require '../src/prototipo'
+require '../src/constructor'
 
 describe 'Constructores en Ruby' do
 

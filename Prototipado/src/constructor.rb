@@ -15,7 +15,7 @@ class Constructor
       else
         selector = '@'.concat(clave.to_s)
       end
-      objeto.agregar_variable(selector.to_sym, valor)
+      objeto.set_property(selector.to_sym, valor)
     }
     objeto
   end
@@ -32,7 +32,7 @@ class Constructor
       mapa
     }
     bloque = Proc.new {clase.method(:nuevo).call(mapa)}
-    clase.agregar_metodo(:new, bloque)
+    clase.set_method(:new, bloque)
     clase
   end
 

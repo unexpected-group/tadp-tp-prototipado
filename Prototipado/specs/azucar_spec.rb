@@ -1,4 +1,5 @@
 require 'rspec'
+
 require '../../Prototipado/src/prototipo'
 require '../../Prototipado/src/constructor'
 
@@ -12,7 +13,7 @@ describe 'Azucar Sintactico' do
 
   it 'agregar metodo singleton' do
     objeto = Object.new
-    objeto.met_saludar(Proc.new {'Hola'})
+    objeto.met_saludar {'Hola'}
     expect(objeto.saludar).to eq 'Hola'
   end
 end
