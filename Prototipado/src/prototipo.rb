@@ -54,15 +54,14 @@ module Prototipo
   end
 
   # se redefine para poder hacer el azucar sintactico
-  def method_missing(selector, *argumentos, &block)
-    if  selector.to_s.start_with?('prop')
-      array = selector.to_s.split('_')
-      nombre = '@'.concat(array[1])
-      self.set_property(nombre.to_sym, argumentos[0])
-    elsif selector.to_s.start_with?('met')
-      array = selector.to_s.split('_')
-      nombre = array[1]
-      self.set_method(nombre.to_sym, block)
+  def method_missing(selector, *argumentos)
+    if selector.to_s[-1,1] == '='
+      if argumentos[0].is_a? Proc
+        self.set_method(selector.to_s.chop.to_sym, argumentos[0])
+      else
+        selector = selector.to_s.chop.insert(0,'@').to_sym
+        self.set_property(selector, argumentos[0])
+      end
     else
       super
     end
@@ -72,5 +71,4 @@ end
 
 class Object
   include Prototipo
-
 end
