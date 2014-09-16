@@ -6,7 +6,7 @@ describe 'Prototipado en Ruby' do
 
   it 'Se agrega una variable' do
     conan = Object.new
-    conan.set_property(:@vida, 100)
+    conan.set_property(:vida, 100)
     expect(conan.number_of_properties).to eq 1
     conan.vida = 200
     expect(conan.vida).to eq 200
@@ -61,7 +61,7 @@ describe 'Prototipado en Ruby' do
   it 'Se agrega una variable a un objeto y su prototipo no se ve afectado' do
     conan = Object.new
     zorro = Object.new
-    conan.set_property(:@edad, 20)
+    conan.set_property(:edad, 20)
     zorro.add_prototype(conan)
     expect(zorro.instance_variables.include?(:@edad)).to be false
   end
@@ -75,6 +75,7 @@ describe 'Prototipado en Ruby' do
     expect(atila.metodo).to eq "definicion original"
   end
 
+  # esta mal el test
   it 'Crear un prototipo sin repetir el receptor muchas veces' do
     objetoPrototipo = Prototipo.new {
         |prototipo|

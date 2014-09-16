@@ -13,10 +13,13 @@ module Prototipo
 
   # agrega una variable de instancia y crea sus accesors
   def set_property(selector, valor)
+    nombre_accessor = selector
+    unless selector.to_s.start_with?('@')
+      selector = '@'.concat selector.to_s
+    end
     self.instance_variable_set(selector, valor)
-    nombre = selector.to_s.delete '@'
     self.class.instance_eval do
-      attr_accessor nombre
+      attr_accessor nombre_accessor
     end
   end
 
@@ -65,7 +68,8 @@ module Prototipo
       if argumentos[0].is_a? Proc
         self.set_method(selector.to_s.chop.to_sym, argumentos[0])
       else
-        selector = selector.to_s.chop.insert(0, '@').to_sym
+        #selector = selector.to_s.chop.insert(0, '@').to_sym
+        selector = selector.to_s.chop.to_sym
         self.set_property(selector, argumentos[0])
       end
     else

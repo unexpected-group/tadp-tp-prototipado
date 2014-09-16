@@ -9,13 +9,11 @@ class Constructor
     objeto = self.prototipo.class.new
     mapa.each {
         |clave, valor|
-      selector = ''
       if clave.to_s.start_with?('@')
-        selector = clave.to_s
+        objeto.set_property(clave.to_s.delete('@'), valor)
       else
-        selector = '@'.concat(clave.to_s)
+        objeto.set_property(clave, valor)
       end
-      objeto.set_property(selector.to_sym, valor)
     }
     objeto
   end
@@ -30,7 +28,7 @@ class Constructor
         |clave|
       mapa[clave] = prototipo.instance_variable_get(clave)
     }
-    bloque = Proc.new {clase.method(:nuevo).call(mapa)}
+    bloque = Proc.new { clase.method(:nuevo).call(mapa) }
     clase.set_method(:new, bloque)
     clase
   end
