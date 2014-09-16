@@ -55,11 +55,11 @@ module Prototipo
 
   # se redefine para poder hacer el azucar sintactico
   def method_missing(selector, *argumentos)
-    if selector.to_s[-1,1] == '='
+    if selector.to_s[-1, 1] == '='
       if argumentos[0].is_a? Proc
         self.set_method(selector.to_s.chop.to_sym, argumentos[0])
       else
-        selector = selector.to_s.chop.insert(0,'@').to_sym
+        selector = selector.to_s.chop.insert(0, '@').to_sym
         self.set_property(selector, argumentos[0])
       end
     else

@@ -6,8 +6,8 @@ require '../src/constructor'
 describe 'Constructores en Ruby' do
 
   it 'crear una clase desde un prototipo' do
-    prototipo = Jugador.new
-    ConstructorJugador = Constructor.new(prototipo)
+    prototipoJugador = Jugador.new
+    ConstructorJugador = Constructor.new(prototipoJugador)
     jugador = ConstructorJugador.new
     expect(jugador).to be_a(Jugador)
   end

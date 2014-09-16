@@ -29,7 +29,6 @@ class Constructor
     prototipo.instance_variables.each {
         |clave|
       mapa[clave] = prototipo.instance_variable_get(clave)
-      mapa
     }
     bloque = Proc.new {clase.method(:nuevo).call(mapa)}
     clase.set_method(:new, bloque)
