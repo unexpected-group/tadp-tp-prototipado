@@ -75,4 +75,15 @@ describe 'Prototipado en Ruby' do
     expect(atila.metodo).to eq "definicion original"
   end
 
+  it 'Crear un prototipo sin repetir el receptor muchas veces' do
+    objetoPrototipo = Object.new {
+        |prototipo|
+      prototipo.energia = 100
+      prototipo.saludar = Proc.new { "Hola" }
+      prototipo
+    }
+    expect(objetoPrototipo.energia).to eq 100
+    expect(objetoPrototipo.saludar).to eq "Hola"
+  end
+
 end

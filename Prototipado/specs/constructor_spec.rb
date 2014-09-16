@@ -27,4 +27,8 @@ describe 'Constructores en Ruby' do
     expect(jugador.goles).to eq 2
   end
 
+  it '' do
+
+  end
+
 end
