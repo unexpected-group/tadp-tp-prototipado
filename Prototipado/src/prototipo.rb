@@ -3,12 +3,10 @@ require '../src/observable'
 module Prototipo
   include Observable
 
-  alias :nuevo :initialize
-
   attr_accessor :prototipo
 
   def self.new(&bloque)
-    objeto = Object.nuevo
+    objeto = Object.new
     objeto = bloque.call(objeto)
     objeto
   end

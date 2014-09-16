@@ -76,7 +76,7 @@ describe 'Prototipado en Ruby' do
   end
 
   it 'Crear un prototipo sin repetir el receptor muchas veces' do
-    objetoPrototipo = Object.new {
+    objetoPrototipo = Prototipo.new {
         |prototipo|
       prototipo.energia = 100
       prototipo.saludar = Proc.new { "Hola" }
