@@ -19,10 +19,9 @@ describe 'Azucar Sintactico' do
 
   it 'Crear un prototipo sin repetir el receptor muchas veces' do
     objetoPrototipo = Object.nuevo {
-        |prototipo|
-      prototipo.energia = 100
-      prototipo.saludar = Proc.new { "Hola" }
-      prototipo
+      self.energia = 100
+      self.saludar = Proc.new { "Hola" }
+      self
     }
     expect(objetoPrototipo.energia).to eq 100
     expect(objetoPrototipo.saludar).to eq "Hola"

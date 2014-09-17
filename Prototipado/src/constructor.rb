@@ -6,8 +6,9 @@ class Constructor
   end
 
   # devuelve un objeto con las variables pasadas por parametro en el mapa
-  def new(mapa = {})
-    objeto = self.prototipo.class.new
+  def nuevo(mapa = {})
+    objeto = self.prototipo.clone
+    objeto.add_prototype(@prototipo)
     mapa.each {
         |clave, valor|
       if clave.to_s.start_with?('@')
@@ -24,19 +25,23 @@ class Constructor
     @prototipo
   end
 
-  alias :nuevo :new
-
   # devuelve un objeto copia de un prototipo (metodo de clase)
   def self.copy(prototipo)
-    clase = self.new(prototipo)
+    clase = self.new prototipo
     mapa = {}
     prototipo.instance_variables.each {
         |clave|
       mapa[clave] = prototipo.instance_variable_get(clave)
     }
-    bloque = Proc.new { clase.method(:nuevo).call(mapa) }
-    clase.set_method(:new, bloque)
+    bloque = Proc.new { self.method(:nuevo).call(mapa) }
+    clase.set_method(:crear, bloque)
     clase
+  end
+
+  def extender(&bloque)
+    prototipo_extendido = @prototipo.clone
+    prototipo_extendido.instance_eval &bloque
+    constructor_nuevo = self.class.new prototipo_extendido
   end
 
 end
