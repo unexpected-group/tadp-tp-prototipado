@@ -5,11 +5,6 @@ module Prototipo
 
   attr_accessor :prototipo
 
-  def self.new(&bloque)
-    objeto = Object.new
-    objeto = bloque.call(objeto)
-    objeto
-  end
 
   # agrega una variable de instancia y crea sus accesors
   def set_property(selector, valor)
@@ -76,9 +71,16 @@ module Prototipo
       super
     end
   end
+end
 
+module Creador
+  def nuevo(&bloque)
+    objeto = Object.new
+    objeto = bloque.call(objeto)
+  end
 end
 
 class Object
   include Prototipo
+  extend Creador
 end

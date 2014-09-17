@@ -1,7 +1,8 @@
 class Constructor
 
-  def initialize(prototipo)
+  def initialize(prototipo, &bloque)
     @prototipo = prototipo
+    @bloque = bloque || Proc.new {}
   end
 
   # devuelve un objeto con las variables pasadas por parametro en el mapa
@@ -16,6 +17,11 @@ class Constructor
       end
     }
     objeto
+  end
+
+  def novo(*argumentos)
+    @bloque.call(argumentos)
+    @prototipo
   end
 
   alias :nuevo :new
