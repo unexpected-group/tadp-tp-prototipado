@@ -21,7 +21,7 @@ class Constructor
   end
 
   def novo(*argumentos)
-    @bloque.call(argumentos)
+    @bloque.call(*argumentos)
     @prototipo
   end
 
