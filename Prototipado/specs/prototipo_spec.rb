@@ -7,7 +7,7 @@ describe 'Prototipado en Ruby' do
   it 'Se agrega una variable' do
     conan = Object.new
     conan.set_property(:vida, 100)
-    expect(conan.number_of_properties).to eq 1
+    expect(conan.number_of_properties).to eq 2
     conan.vida = 200
     expect(conan.vida).to eq 200
   end
