@@ -3,9 +3,12 @@ require '../src/observable'
 module Prototipo
   include Observable
 
-  attr_accessor :prototipo
+  attr_accessor :prototipo, :prototiposPadres
 
 
+  def initialize
+    @prototiposPadres = []
+  end
   # agrega una variable de instancia y crea sus accesors
   def set_property(selector, valor)
     nombre_accessor = selector
@@ -26,6 +29,7 @@ module Prototipo
 
   # agrega un prototipo que provee solo comportamiento
   def add_prototype(prototipo)
+    @prototiposPadres << prototipo
     prototipo.add_observer(self)
     self.update_methods(prototipo)
   end
@@ -67,9 +71,22 @@ module Prototipo
         selector = selector.to_s.chop.to_sym
         self.set_property(selector, argumentos[0])
       end
+    elsif selector.to_s.eql? 'superior'
+      metodo = argumentos[0]
+      call_father(metodo)
     else
       super
     end
+  end
+
+  def call_father(metodo)
+    prototiposPadres.each {
+        | prototipo|
+      if prototipo.methods.include? metodo
+        return prototipo.method(metodo).call
+      end
+    }
+
   end
 end
 
