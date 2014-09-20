@@ -1,14 +1,14 @@
-require_relative '../src/observable'
+require_relative 'observable'
 
 module Prototipo
   include Observable
 
-  attr_accessor :prototipo, :prototiposPadres
-
+  attr_accessor :prototipo, :prototipos_padres
 
   def initialize
-    @prototiposPadres = []
+    @prototipos_padres = []
   end
+
   # agrega una variable de instancia y crea sus accesors
   def set_property(selector, valor)
     nombre_accessor = selector
@@ -29,7 +29,7 @@ module Prototipo
 
   # agrega un prototipo que provee solo comportamiento
   def add_prototype(prototipo)
-    @prototiposPadres << prototipo
+    @prototipos_padres << prototipo
     prototipo.add_observer(self)
     self.update_methods(prototipo)
   end
@@ -66,8 +66,8 @@ module Prototipo
   end
 
   def call_father(metodo)
-    prototiposPadres.each {
-        | prototipo|
+    prototipos_padres.each {
+        |prototipo|
       if prototipo.methods.include? metodo
         return prototipo.method(metodo).call
       end
@@ -81,7 +81,6 @@ module Prototipo
       if argumentos[0].is_a? Proc
         self.set_method(selector.to_s.chop.to_sym, argumentos[0])
       else
-        #selector = selector.to_s.chop.insert(0, '@').to_sym
         selector = selector.to_s.chop.to_sym
         self.set_property(selector, argumentos[0])
       end
@@ -93,10 +92,12 @@ module Prototipo
 end
 
 module Creador
+
   def nuevo(&bloque)
     objeto = Object.new
     objeto = bloque.call(objeto)
   end
+
 end
 
 class Object

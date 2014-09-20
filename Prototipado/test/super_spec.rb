@@ -13,7 +13,7 @@ describe 'Super prototypes' do
     objeto.add_prototype(juan)
     objeto.add_prototype(pablo)
     objeto.set_method(:saludar, Proc.new {'Yo'})
-    expect(objeto.prototiposPadres.size).to eq 2
+    expect(objeto.prototipos_padres.size).to eq 2
     expect(objeto.saludar).to eq 'Yo'
   end
 
