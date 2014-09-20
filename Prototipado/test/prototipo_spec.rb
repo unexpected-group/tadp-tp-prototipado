@@ -1,6 +1,6 @@
 require 'rspec'
 
-require '../src/prototipo'
+require_relative '../src/prototipo'
 
 describe 'Prototipado en Ruby' do
 

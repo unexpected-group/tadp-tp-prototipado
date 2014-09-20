@@ -1,4 +1,4 @@
-require '../src/observable'
+require_relative '../src/observable'
 
 module Prototipo
   include Observable

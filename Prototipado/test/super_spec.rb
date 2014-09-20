@@ -1,5 +1,6 @@
 require 'rspec'
-require '../src/prototipo'
+
+require_relative '../src/prototipo'
 
 describe 'Super prototypes' do
 

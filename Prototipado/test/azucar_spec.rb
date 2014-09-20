@@ -1,7 +1,7 @@
 require 'rspec'
 
-require '../src/prototipo'
-require '../src/constructor'
+require_relative '../src/prototipo'
+require_relative '../src/constructor'
 
 describe 'Azucar Sintactico' do
 
