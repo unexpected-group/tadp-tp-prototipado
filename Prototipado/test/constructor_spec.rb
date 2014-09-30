@@ -1,5 +1,3 @@
-require 'rspec'
-
 require_relative '../src/prototipo'
 require_relative '../src/constructor'
 
@@ -31,15 +29,11 @@ describe 'Constructores en Ruby' do
     prototipo_jugador = Jugador.new
     constructor_jugador = Constructor.new(prototipo_jugador)
     constructor_arquero = constructor_jugador.extender do
-        |atajadas|
-      self.set_property(:atajadas,atajadas)
-      self.set_method(:atajar, Proc.new {
-        @atajadas += 1
-      })
+      self.set_property(:atajadas, 0)
+      self.set_method(:atajar, Proc.new { self.atajadas += 1 })
     end
     arquero = constructor_arquero.nuevo({:goles => 5, :edad => 18, :atajadas => 5})
-    puts arquero.method(:atajar)
-    puts arquero.method(:hacer_gol)
+    arquero.atajar
     arquero.hacer_gol
     expect(arquero.goles).to eq 6
     expect(arquero.atajadas).to eq 6

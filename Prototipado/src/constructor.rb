@@ -41,7 +41,7 @@ class Constructor
   def extender(&bloque)
     prototipo_extendido = @prototipo.clone
     prototipo_extendido.instance_eval &bloque
-    constructor_nuevo = self.class.new prototipo_extendido
+    self.class.new prototipo_extendido
   end
 
 end
