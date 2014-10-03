@@ -1,7 +1,7 @@
 module Observable
 
   def add_observer(observador)
-    @observadores = @observadores || []
+    @observadores ||= []
     @observadores << observador
   end
 
